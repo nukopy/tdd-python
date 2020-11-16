@@ -39,14 +39,14 @@ jobs:
         id: cached-poetry-dependencies
         uses: actions/cache@v2
         with:
-          path: venv
-          key: venv-${{ hashFiles("**/poetry.lock") }}
+          path: ./venv
+          key: venv-${{ hashFiles('**/poetry.lock') }}
       - name: Install dependencies
         run: poetry install --no-interaction
         env:
           POETRY_VIRTUALENVS_CREATE: true
           POETRY_VIRTUALENVS_IN_PROJECT: true
-          POETRY_VIRTUALENVS_PATH: "./venv"
+          POETRY_VIRTUALENVS_PATH: ./venv
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
 
       - name: Run Tests
