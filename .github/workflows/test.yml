@@ -1,0 +1,50 @@
+name: pytest
+
+on:
+  # when pushed to master, or pull-request to master
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - "docs/**"
+
+jobs:
+  test:
+    name: Run tests with pytest
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7, 3.8, 3.9]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+
+      - name: Add path for Poetry
+        run: echo "::add-path::$HOME/.poetry/bin"
+
+      - name: Install Dependencies
+        run: poetry install --no-interaction
+
+      - name: Run Tests
+        run: poetry run pytest test --cov=./slack_api_decorator --cov-report=xml
+
+      - name: Upload coverage to Codecov
+        if: ${{ matrix.python-version==3.8 }}
+        uses: codecov/codecov-action@v1
+        with:
+          file: ./coverage.xml
+          name: codecov-umbrella
+          fail_ci_if_error: true
