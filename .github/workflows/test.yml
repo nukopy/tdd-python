@@ -1,0 +1,72 @@
+name: pytest
+
+on:
+  # when pushed to master, or pull-request to master
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - "docs/**"
+
+jobs:
+  test:
+    name: Run tests with pytest
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Set up Poetry latest
+        run: |
+          pip install -U pip
+          pip install poetry
+          poetry --version
+
+      - name: Load cached .venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v2
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-
+
+      - name: Install dependencies
+        run: poetry install --no-interaction
+        env:
+          POETRY_VIRTUALENVS_CREATE: true
+          POETRY_VIRTUALENVS_IN_PROJECT: true
+          POETRY_VIRTUALENVS_PATH: .venv
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+      
+      - name: Set PYTHONPATH
+        run: |
+          echo "PYTHONPATH=." >> $GITHUB_ENV
+
+      - name: Print directry structure
+        run: |
+          echo $PWD
+          echo $(ls)
+          echo $PYTHONPATH
+
+      - name: Run Tests
+        run: poetry run pytest -v tests --junitxml=junit/test-results.xml --cov=app --cov-report=xml --cov-report=html
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1.0.6
+        with:
+          file: ./coverage.xml
+          name: codecov
+          fail_ci_if_error: true
