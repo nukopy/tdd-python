@@ -58,7 +58,7 @@ jobs:
           echo $(ls ..)
 
       - name: Run Tests
-        run: poetry run pytest -v tests/
+        run: poetry run pytest -v tests --junitxml=junit/test-results.xml --cov=app --cov-report=xml --cov-report=html
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
