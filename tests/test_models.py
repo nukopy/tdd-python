@@ -5,20 +5,25 @@ class MyModel:
 
     @classmethod
     def from_dict(cls, dict_mymodel):
-        return cls(dict_mymodel)
+        return cls(**dict_mymodel)
 
     def to_dict(self):
-        return self.to_dict()
+        return self.__dict__
 
 
 class TestMyModel:
     def test_from_dict(self):
-        dic_model = {"id": 3, "name": "mymodel"}
-        model = MyModel.from_dict(dic_model)
+        dict_mymodel = {"id": 3, "name": "mymodel"}
+        model = MyModel.from_dict(dict_mymodel)
 
         assert isinstance(model, MyModel)
         assert model.id == 3
         assert model.name == "mymodel"
 
     def test_to_dict(self):
-        pass
+        model = MyModel(id=3, name="mymodel")
+        dict_mymodel = model.to_dict()
+
+        assert dict_mymodel["id"] == 3
+        assert dict_mymodel["name"] == "mymodel"
+
