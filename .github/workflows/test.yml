@@ -44,12 +44,12 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install dependencies
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no-interaction
         env:
           POETRY_VIRTUALENVS_CREATE: true
           POETRY_VIRTUALENVS_IN_PROJECT: true
           POETRY_VIRTUALENVS_PATH: .venv
-        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
       
       - name: Set PYTHONPATH
         run: |
@@ -64,9 +64,10 @@ jobs:
       - name: Run Tests
         run: poetry run pytest -v tests --junitxml=junit/test-results.xml --cov=app --cov-report=xml --cov-report=html
 
-      # - name: Upload coverage to Codecov
-      #   uses: codecov/codecov-action@v1.0.6
-      #   with:
-      #     file: ./coverage.xml
-      #     name: codecov
-      #     fail_ci_if_error: true
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1.0.6
+        with:
+          name: codecov
+          file: ./coverage.xml
+          fail_ci_if_error: true
+          verbose: true
