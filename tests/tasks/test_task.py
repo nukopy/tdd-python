@@ -1,5 +1,3 @@
-""" Test the "Task" data type. """
-
 from typing import Any, Dict
 
 from app.tasks import Task
