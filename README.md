@@ -1,5 +1,7 @@
 # tdd-python
 
+![pytest](https://github.com/nukopy/tdd-python/workflows/pytest/badge.svg?branch=master) [![codecov](https://codecov.io/gh/nukopy/tdd-python/branch/master/graph/badge.svg)](https://codecov.io/gh/nukopy/tdd-python)
+
 ## Requirements
 
 - OS
