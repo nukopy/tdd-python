@@ -1,3 +1,3 @@
 .PHONY: test
 test:
-	pytest -v ./tests/
+	poetry run pytest -v tests

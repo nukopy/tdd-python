@@ -34,12 +34,14 @@ jobs:
           pip install poetry
           poetry --version
 
-      - name: Load cached venv
+      - name: Load cached .venv
         id: cached-poetry-dependencies
         uses: actions/cache@v2
         with:
           path: .venv
-          key: venv-${{ hashFiles('**/poetry.lock') }}
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-
 
       - name: Install dependencies
         run: poetry install --no-interaction
