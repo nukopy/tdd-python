@@ -38,7 +38,7 @@ jobs:
         id: cached-poetry-dependencies
         uses: actions/cache@v2
         with:
-          path: ./venv
+          path: .venv
           key: venv-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install dependencies
@@ -46,19 +46,19 @@ jobs:
         env:
           POETRY_VIRTUALENVS_CREATE: true
           POETRY_VIRTUALENVS_IN_PROJECT: true
-          POETRY_VIRTUALENVS_PATH: ./venv
+          POETRY_VIRTUALENVS_PATH: .venv
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
 
-      - name: Print direcotry structure
+      - name: Print directry structure
         run: |
           echo $PWD
           echo $(ls)
+          echo $(ls ..)
 
       - name: Run Tests
         run: poetry run pytest -v tests/
 
       - name: Upload coverage to Codecov
-        if: ${{ matrix.python-version==3.8 }}
         uses: codecov/codecov-action@v1
         with:
           file: ./coverage.xml
