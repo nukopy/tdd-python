@@ -50,12 +50,16 @@ jobs:
           POETRY_VIRTUALENVS_IN_PROJECT: true
           POETRY_VIRTUALENVS_PATH: .venv
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+      
+      - name: Set PYTHONPATH
+        run: |
+          echo "PYTHONPATH=." >> $GITHUB_ENV
 
       - name: Print directry structure
         run: |
           echo $PWD
           echo $(ls)
-          echo $(ls ..)
+          echo $PYTHONPATH
 
       - name: Run Tests
         run: poetry run pytest -v tests --junitxml=junit/test-results.xml --cov=app --cov-report=xml --cov-report=html
