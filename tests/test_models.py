@@ -13,7 +13,12 @@ class MyModel:
 
 class TestMyModel:
     def test_from_dict(self):
-        pass
+        dic_model = {"id": 3, "name": "mymodel"}
+        model = MyModel.from_dict(dic_model)
+
+        assert isinstance(model, MyModel)
+        assert model.id == 3
+        assert model.name == "mymodel"
 
     def test_to_dict(self):
         pass
