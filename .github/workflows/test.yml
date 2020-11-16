@@ -30,7 +30,6 @@ jobs:
 
       - name: Set up Poetry latest
         run: |
-          echo $PWD
           pip install -U pip
           pip install poetry
           poetry --version
@@ -50,8 +49,13 @@ jobs:
           POETRY_VIRTUALENVS_PATH: ./venv
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
 
+      - name: Print direcotry structure
+        run: |
+          echo $PWD
+          echo $(ls)
+
       - name: Run Tests
-        run: poetry run pytest test
+        run: poetry run pytest -v tests/
 
       - name: Upload coverage to Codecov
         if: ${{ matrix.python-version==3.8 }}
