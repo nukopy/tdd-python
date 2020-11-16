@@ -1,5 +1,7 @@
 # tdd-python
 
+![pytest](https://github.com/nukopy/tdd-python/workflows/pytest/badge.svg?branch=master)
+
 ## Requirements
 
 - OS
