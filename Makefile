@@ -5,10 +5,6 @@ SERVICE="app"
 dcb:
 	docker-compose build
 
-.PHONY: dce
-dcb:
-	docker-compose exec $(SERVICE) /bin/bash
-
 .PHONY: dcu
 dcu:
 	docker-compose up $(SERVICE) -d
@@ -17,6 +13,10 @@ dcu:
 .PHONY: dcd
 dcd:
 	docker-compose down
+
+.PHONY: dce
+dce:
+	docker-compose exec $(SERVICE) /bin/bash
 
 # in Docker container
 .PHONY: test
