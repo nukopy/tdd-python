@@ -1,4 +1,4 @@
-SERVICE="app"
+SERVICE=app
 
 # Docker commands
 .PHONY: dcb
@@ -7,7 +7,7 @@ dcb:
 
 .PHONY: dcu
 dcu:
-	docker-compose up $(SERVICE) -d
+	docker-compose up -d $(SERVICE)
 
 
 .PHONY: dcd
