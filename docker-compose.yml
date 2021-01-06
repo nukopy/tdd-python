@@ -5,6 +5,4 @@ services:
     build: .
     tty: true
     volumes:
-      - ./app:/workdir/app
-      - ./docs:/workdir/docs
-      - ./tests:/workdir/tests
+      - .:/workdir

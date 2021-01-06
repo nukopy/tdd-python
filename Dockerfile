@@ -18,12 +18,6 @@ COPY poetry.lock pyproject.toml ./
 RUN poetry config virtualenvs.create false \
     && poetry install
 
-# add source
-ADD app .
-ADD docs .
-ADD tests .
-ADD pytest.ini pyproject.toml poetry.lock ./
-
 # pythonpath setting
 ENV PYTHONPATH "/"
 
