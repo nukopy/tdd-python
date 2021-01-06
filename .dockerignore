@@ -1,0 +1,8 @@
+**
+
+!app/
+!docs/
+!tests/
+!pytest.ini
+!pyproject.toml
+!poetry.lock
