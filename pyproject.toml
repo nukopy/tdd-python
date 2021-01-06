@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "study-test"
+name = "tdd-python"
 version = "0.1.0"
 description = ""
 authors = ["nukopy <pytwbf201830@gmail.com>"]
