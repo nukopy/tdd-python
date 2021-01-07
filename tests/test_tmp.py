@@ -19,7 +19,7 @@ def test_skip():
 def test_tuple_comprehension_failing():
     """ Failing test """
 
-    tup = tuple(i for i in range(3))
+    tup = tuple(i for i in range(3))  # (0, 1, 2)
     expected = (1, 2, 3)
 
     assert tup == expected
@@ -38,4 +38,8 @@ def test_marker2():
 @pytest.mark.slow()
 def test_slow():
     # slow test
+    pass
+
+
+def test_failing():
     pass
