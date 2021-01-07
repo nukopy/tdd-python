@@ -19,6 +19,6 @@ RUN poetry config virtualenvs.create false \
     && poetry install
 
 # pythonpath setting
-ENV PYTHONPATH "/"
+ENV PYTHONPATH "/workdir"
 
 CMD ["/bin/bash"]
