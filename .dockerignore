@@ -1,6 +1,6 @@
 **
 
-!app/
+!src/
 !docs/
 !tests/
 !pytest.ini

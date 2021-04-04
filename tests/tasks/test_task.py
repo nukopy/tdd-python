@@ -1,6 +1,6 @@
 from typing import Any, Dict
 
-from app.tasks import Task
+from tasks import Task
 
 
 def test_defaults():
