@@ -1,5 +1,12 @@
 SERVICE=app
 
+.PHONY: build
+build:
+	docker-compose build
+	docker-compose up -d $(SERVICE)
+	# for install the package locally
+	docker-compose exec $(SERVICE) poetry install
+
 # Docker commands
 .PHONY: dcb
 dcb:
@@ -8,7 +15,6 @@ dcb:
 .PHONY: dcu
 dcu:
 	docker-compose up -d $(SERVICE)
-
 
 .PHONY: dcd
 dcd:
