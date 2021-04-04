@@ -26,4 +26,3 @@ class TestMyModel:
 
         assert dict_mymodel["id"] == 3
         assert dict_mymodel["name"] == "mymodel"
-

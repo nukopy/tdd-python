@@ -14,8 +14,8 @@ BuildVersion:   19F101
 ```
 
 - Software Versions
-  - Python 3.9.0
-  - Poetry 1.1.4
+  - Docker version 20.10.0, build 7287ab3
+  - Docker Compose version 1.27.4, build 40524192
 
 ## Environment Setup
 
@@ -25,18 +25,24 @@ BuildVersion:   19F101
 git clone git@github.com:nukopy/tdd-python.git
 ```
 
-- install Python packages with Poetry
+- Build & Run Docker Container
 
 ```sh
 cd tdd-python
-python -m venv venv
-source venv/bin/activate
-pip install -U pip
-poetry install
+
+# build Docker image
+make dcb
+
+# build & start container
+make dcu
+# Let's coding in VSCode extension "Remote - Containers"
+
+# stop & remove container
+make dcd
 ```
 
-- execute tests
+## Install `task_proj` locally
 
 ```sh
-make test
+pip install ./lib/tasks_proj
 ```
