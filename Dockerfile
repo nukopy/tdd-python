@@ -22,7 +22,7 @@ RUN poetry config virtualenvs.create false
 RUN poetry config virtualenvs.in-project false
 RUN poetry install
 
-# pythonpath setting
-ENV PYTHONPATH "/workdir"
+# PYTHONPATH
+ENV PYTHONPATH "/workdir/src"
 
 CMD ["/bin/bash"]
