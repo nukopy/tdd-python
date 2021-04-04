@@ -1,7 +1,10 @@
 .DS_Store
 .vscode
 .envrc
-docs/cf/
+docs/cf
+
+# pyenv
+.python-version
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
